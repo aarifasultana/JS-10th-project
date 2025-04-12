@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>job-portal-Login and Register</title>
+    <link rel="icon" type="image/icon" href="title-logo.png" />
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #dde1e7;
+        text-align: center;
+        height: 100vh;
+      }
+
+      #auth-section {
+        width: 330px;
+        padding: 40px 30px;
+        background: #dde1e7;
+        border-radius: 10px;
+        box-shadow: -3px -3px 7px #ffffff73,
+          2px 2px 5px rgba(94, 104, 121, 0.288);
+      }
+
+      h1 {
+        font-size: 33px;
+        font-weight: 600;
+        margin-bottom: 35px;
+        color: #595959;
+      }
+
+      h3 {
+        font-size: 33px;
+        font-weight: 600;
+        margin-bottom: 35px;
+        color: #595959;
+      }
+
+      .input-group {
+        margin: 20px 0;
+        height: 50px;
+        width: 100%;
+
+        position: relative;
+      }
+
+      .input-group input {
+        transition: all 0.3s;
+        height: 100%;
+        width: 100%;
+        padding-left: 45px;
+        /* outline: none; */
+        border: none;
+        /* font-size: 18px; */
+        background: #dde1e7;
+        color: #595959;
+        border-radius: 25px;
+        box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+      }
+
+      .input-group label {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #aaa;
+        font-size: 0.9em;
+        pointer-events: none;
+        transition: all 0.3s;
+      }
+
+      .input-group input:focus + label,
+      .input-group input:not(:placeholder-shown) + label {
+        top: -8px;
+        background: #949393;
+        padding: 0 5px;
+        font-size: 0.75em;
+        color: beige;
+      }
+
+      button {
+        margin: 15px 0;
+        width: 100%;
+        height: 50px;
+        font-size: 18px;
+        line-height: 50px;
+        font-weight: 600;
+        background: #dde1e7;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        color: #595959;
+        box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+      }
+
+      p {
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: 15px;
+      }
+
+      p a {
+        color: #999992;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      #login-section,
+      #register-form {
+        opacity: 0;
+        display: none;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      #login-section.active,
+      #register-form.active {
+        display: block;
+        opacity: 1;
+      }
+
+      #login-section.active {
+        display: block;
+        opacity: 1;
+      }
+
+      .side-img {
+        background-image: url(assets/background.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 50vw;
+        height: 100%;
+      }
+
+      .pro p {
+        font-weight: 700;
+      }
+      .error-message {
+        color: red;
+        font-size: 12px;
+        display: block;
+        text-align: left;
+      }
+      .role-toggle {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        /* border-radius: 30px;
+    background: #28a745;
+    padding: 5px;
+    width: 100%;
+    max-width: 320px;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+      }
+
+      .role-btn {
+        /* transition: all 0.3s; */
+        border: none;
+        background: #dde1e7;
+        color: #595959;
+        border-radius: 25px;
+        box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+        flex: 1;
+        padding: 12px 15px;
+        margin: 0px;
+        color: #999992;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        border-radius: 30px;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .role-btn.active {
+        background: #dde1e7;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        color: #595959;
+        box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+      }
+
+      .role-btn i {
+        font-size: 18px;
+      }
+
+      .role-btn span {
+        display: inline-block;
+        text-align: center;
+        line-height: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="auth-section">
+      <!-- Login Form -->
+      <div id="login-section" class="active">
+        <h3>Login</h3>
+        <div class="input-group">
+          <input type="email" id="login-email" placeholder=" " />
+          <label for="login-email">Email</label>
+          <span id="login-email-error" class="error-message"></span>
+        </div>
+        <div class="input-group">
+          <input type="password" id="login-password" placeholder=" " />
+          <label for="login-password">Password</label>
+          <span id="login-password-error" class="error-message"></span>
+        </div>
+        <div class="role-toggle">
+          <button
+            id="job-seeker"
+            class="role-btn active"
+            onclick="selectRole('job-seeker')"
+          >
+            <i class="fa fa-user"></i> Job Seeker
+          </button>
+          <button
+            id="job-provider"
+            class="role-btn"
+            onclick="selectRole('job-provider')"
+          >
+            <i class="fa fa-user-tie"></i> Job Provider
+          </button>
+        </div>
+        <input type="hidden" id="user-role" value="job-seeker" />
+        <button onclick="loginUser()" id="login-btn">Login</button>
+        <p>
+          Don't have an account?
+          <a href="#" onclick="toggleSection()">Register</a>
+        </p>
+      </div>
+
+      <!-- Register Form -->
+      <form id="register-form">
+        <h3>Register</h3>
+        <div class="input-group">
+          <input type="text" id="register-username" placeholder=" " />
+          <label for="register-username">Username</label>
+          <span id="username-error" class="error-message"></span>
+        </div>
+        <div class="input-group">
+          <input type="email" id="register-email" placeholder=" " />
+          <label for="register-email">Email</label>
+          <span id="email-error" class="error-message"></span>
+        </div>
+        <div class="input-group">
+          <input type="password" id="register-password" placeholder=" " />
+          <label for="register-password">Password</label>
+          <span id="password-error" class="error-message"></span>
+        </div>
+        
+
+        <button type="button" id="register-btn" onclick="registerUser()">
+          Register
+        </button>
+        <p>
+          Already have an account?
+          <a href="#" onclick="toggleSection()">Login</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- Firebase CDN links for SDK version 8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="firebaseconfig.js"></script>
+    <script src="myconfig.js"></script>
+    <script>
+      //  Firebase configuration
+      const firebaseConfig = myfirebaseConfig;
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+
+      // Toggle between login and register sections
+      function toggleSection() {
+        document.getElementById("login-section").classList.toggle("active");
+        document.getElementById("register-form").classList.toggle("active");
+      }
+
+      //       function selectRole(role) {
+      //     document.getElementById("user-role").value = role;
+
+      //     // Toggle active class for buttons
+      //     document.getElementById("job-seeker").classList.toggle("active", role === "job-seeker");
+      //     document.getElementById("job-provider").classList.toggle("active", role === "job-provider");
+      // }
+      
+
+      
+
+
+      function selectRole(role) {
+      document.getElementById("user-role").value = role;
+
+      // Toggle active class for buttons
+      document.getElementById("job-seeker").classList.toggle("active", role === "job-seeker");
+      document.getElementById("job-provider").classList.toggle("active", role === "job-provider");
+
+      // Get the currently logged-in user
+      auth.onAuthStateChanged(user => {
+          if (user) {
+              // Store role in Firestore under "users" collection
+              db.collection("users").doc(user.uid).set({
+                  role: role
+              }, { merge: true })
+              .then(() => {
+                  console.log("Role updated successfully!");
+              })
+              .catch(error => {
+                  console.error("Error updating role: ", error);
+              });
+          } else {
+              console.log("No user logged in");
+          }
+      });
+  }
+
+
+      //  function loginUser() {
+      //     const email = document.getElementById("login-email").value;
+      //     const password = document.getElementById("login-password").value;
+
+      //     auth.signInWithEmailAndPassword(email, password)
+      //         .then((userCredential) => {
+      //             const user = userCredential.user;
+      //             // Fetch user details from Firestore
+      //             db.collection("users").doc(user.uid).get().then((doc) => {
+      //                 if (doc.exists) {
+      //                     const userName = doc.data().username; // Retrieve username from Firestore
+      //                     localStorage.setItem("username", userName); // Store in localStorage
+      //                     window.location.href = "index1.html"; // Redirect to main page
+      //                 } else {
+      //                     console.log("No such user document!");
+      //                 }
+      //             });
+      //         })
+      //         .catch(error => {
+      //             console.log("Error: " + error.message);
+      //             alert("Error: Invalid username or password");
+      //         });
+      // }
+
+      // Register user
+      // async function registerUser() {
+      //     const email = document.getElementById("register-email").value;
+      //     const password = document.getElementById("register-password").value;
+      //     const username = document.getElementById("register-username").value;
+
+      //     const registerButton = document.getElementById("register-btn");
+
+      //     if (email && password && username) {
+      //         // Show spinner and disable button
+      //         registerButton.disabled = true;
+      //         registerButton.innerHTML = `
+      //             <div class="spinner-div"> <span class="spinner"></span></div>
+      //         `;
+
+      //         try {
+      //             const cred = await auth.createUserWithEmailAndPassword(email, password);
+
+      //             await db.collection("users").doc(cred.user.uid).set({
+      //                 username: username,
+      //             });
+
+      //             alert("Registration successful! Welcome to JobHive");
+      //             toggleSection();
+      //         } catch (error) {
+      //             console.log("Error: " + error.message);
+
+      //             // Check if the error is due to an existing user
+      //             if (error.code === "auth/email-already-in-use") {
+      //                 alert("User already exists. Please log in.");
+      //                 window.location.href = "login.html";
+      //             } else {
+      //                 alert("Error: " + error.message);
+      //             }
+      //         } finally {
+      //             registerButton.disabled = false;
+      //             registerButton.innerHTML = 'Register';
+      //         }
+      //     } else {
+      //         alert("Please fill all fields.");
+      //     }
+      // }
+
+      // Register user
+
+      function loginUser() {
+        const email = document.getElementById("login-email").value.trim();
+        const password = document.getElementById("login-password").value.trim();
+
+        // Get error message elements
+        const emailError = document.getElementById("login-email-error");
+        const passwordError = document.getElementById("login-password-error");
+
+        // Clear previous error messages
+        emailError.textContent = "";
+        passwordError.textContent = "";
+
+        let isValid = true;
+
+        // Email validation
+        if (!email) {
+          emailError.textContent = "Email is required";
+          isValid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+          emailError.textContent = "Invalid email format";
+          isValid = false;
+        }
+
+        // Password validation
+        if (!password) {
+          passwordError.textContent = "Password is required";
+          isValid = false;
+        }
+
+        // Stop function if validation fails
+        if (!isValid) {
+          return;
+        }
+
+        // Show loading state
+        const loginButton = document.getElementById("login-btn");
+        loginButton.disabled = true;
+        loginButton.innerHTML = `<div class="spinner-div"><span class="spinner"></span></div>`;
+
+        auth
+          .signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+
+            db.collection("users")
+              .doc(user.uid)
+              .get()
+              .then((doc) => {
+                if (doc.exists) {
+                  const userName = doc.data().username;
+                  localStorage.setItem("username", userName);
+                  window.location.href = "index1.html";
+                } else {
+                  console.log("No such user document!");
+                }
+              });
+          })
+          .catch((error) => {
+            console.log("Error: " + error.message);
+
+            // Display proper authentication error messages
+            if (error.code === "auth/user-not-found") {
+              emailError.textContent = "No account found with this email.";
+            } else if (error.code === "auth/wrong-password") {
+              passwordError.textContent = "Incorrect password.";
+            } else {
+              //   emailError.textContent = "Login failed. Please try again.";
+              alert("Login failed. Please try again.");
+            }
+          })
+          .finally(() => {
+            loginButton.disabled = false;
+            loginButton.innerHTML = "Login";
+          });
+      }
+
+      async function registerUser() {
+        const email = document.getElementById("register-email").value.trim();
+        const password = document
+          .getElementById("register-password")
+          .value.trim();
+        const username = document
+          .getElementById("register-username")
+          .value.trim();
+
+        // Get error message elements
+        const emailError = document.getElementById("email-error");
+        const passwordError = document.getElementById("password-error");
+        const usernameError = document.getElementById("username-error");
+
+        // Clear previous error messages
+        emailError.textContent = "";
+        passwordError.textContent = "";
+        usernameError.textContent = "";
+
+        let isValid = true;
+
+        // Validation checks
+
+        if (!username) {
+          usernameError.textContent = "Username is required";
+          isValid = false;
+        }
+
+        if (!email) {
+          emailError.textContent = "Email is required";
+          isValid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+          emailError.textContent = "Invalid email format";
+          isValid = false;
+        }
+
+        if (!password) {
+          passwordError.textContent = "Password is required";
+          isValid = false;
+        } else if (password.length < 6) {
+          passwordError.textContent = "Password must be at least 6 characters";
+          isValid = false;
+        }
+
+        if (!isValid) {
+          return; // Stop function execution if validation fails
+        }
+
+        const registerButton = document.getElementById("register-btn");
+
+        // Show spinner and disable button
+        registerButton.disabled = true;
+        registerButton.innerHTML = `<div class="spinner-div"><span class="spinner"></span></div>`;
+
+        try {
+          const cred = await auth.createUserWithEmailAndPassword(
+            email,
+            password
+          );
+
+          await db.collection("users").doc(cred.user.uid).set({
+            username: username,
+          });
+
+          alert("Registration successful! Welcome to JobHive");
+          toggleSection();
+        } catch (error) {
+          console.log("Error: " + error.message);
+
+          // Check if the error is due to an existing user
+          if (error.code === "auth/email-already-in-use") {
+            alert("User already exists. Please log in.");
+            window.location.href = "login.html";
+          } else {
+            alert("Error: " + error.message);
+          }
+        } finally {
+          registerButton.disabled = false;
+          registerButton.innerHTML = "Register";
+        }
+      }
+
+      const myJobs = jobs.filter((job) => job.owner === currentUser);
+    </script>
+  </body>
+</html>

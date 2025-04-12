@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>loading....</title>
+  <link rel="icon" type="image/icon"href="title-logo.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background: black;
+    }
+
+    #loading-page {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contain {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="contain">
+    <div id="loading-page">
+      <video src="Your paragraph text.mp4" autoplay muted></video>
+    </div>
+  </div>
+
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+      let video = document.querySelector('video');
+
+      // Hide the video after it plays
+      video.addEventListener('ended', function () {
+        video.style.display = 'none';
+      });
+
+      // Redirect after 5 seconds
+      setTimeout(function () {
+        window.location.href = 'index1.html';
+      }, 3000);
+    });
+
+  </script>
+</body>
+
+</html>

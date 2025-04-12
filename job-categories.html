@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Categories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="icon" type="image/icon" href="title-logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+      }
+
+       body {
+        width: 100%;
+        overflow-x: hidden;
+        /* background-color: #f4f4f4; */
+        background-color: rgb(15 23 42/ 1);
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 12vh;
+        /* padding: 15px; */
+        padding: 10px 20px;
+        transition: background-color 0.3s ease-in-out,
+          box-shadow 0.3s ease-in-out;
+        color: white;
+        position: fixed;
+        z-index: 999;
+        width: 100%;
+        top: 0;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 0 15px;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+      }
+
+      .logo img {
+        height: 28vh;
+        width: 13vw;
+      }
+
+      .circle {
+        width: 10px;
+        height: 10px;
+        background: linear-gradient(45deg, #4caf50, #008cba);
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links li {
+        position: relative;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+      }
+
+      .nav-links li:hover .dropdown {
+        display: block;
+      }
+
+      .dropdown {
+        display: none;
+        position: absolute;
+        /* background: white;
+            color: black; */
+        top: 100%;
+        left: 0;
+        background: white;
+        list-style: none;
+        padding: 10px;
+        min-width: 200px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .dropdown li {
+        /* padding: 5px 10px; */
+        /* background: #f0f0f0; */
+        color: black;
+        padding: 10px;
+        cursor: pointer;
+      }
+      .dropdown li:hover {
+        background: #f0f0f0;
+      }
+
+      .right-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .right-section a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .right-section a:hover {
+        text-decoration: underline;
+      }
+
+      .profile {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .profile-dropdown {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 50px;
+        background: white;
+        list-style: none;
+        padding: 10px;
+        min-width: 150px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-dropdown li {
+        color: black;
+        padding: 10px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .profile-dropdown li:hover {
+        background: #f0f0f0;
+        text-decoration: none;
+      }
+
+      /* Hamburger menu icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+      /* Responsive styles */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 15px;
+  }
+
+  .nav-links,
+  .right-section {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgb(15 23 42/ 1);
+    padding: 10px 0;
+    margin-top: 10px;
+  }
+
+  .nav-links.active,
+  .right-section.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .right-section {
+    justify-content: center;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .logo img {
+    height: 100%;
+    width: 30vw;
+  }
+}
+
+
+      /* section.hero {
+        display: flex;
+        justify-content: center;
+        color: #fff;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        margin-bottom: 5rem;
+      } */
+
+      section.hero {
+  position: relative; /* ✅ Make sure this is set */
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin-bottom: 5rem;
+  overflow: hidden; /* Prevent overflow issues */
+}
+      section.hero h1 {
+        font-size: 65px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+        text-align: center;
+        width: 50vw;
+      }
+      section.hero p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        line-height: 1.5;
+        width: 60%;
+        text-align: center;
+      }
+
+      .hero-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+      /* .hero-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding-top: 120px;  ✅ Add this to push next section down 
+  padding-bottom: 120px;
+  box-sizing: border-box;
+  z-index: 1;
+} */
+
+      .video-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100vw;
+        height: 56.25vw; /* Maintain 16:9 aspect ratio */
+        min-height: 100vh;
+        min-width: 177.78vh;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+       @media (max-width: 1024px) {
+  section.hero h1 {
+    font-size: 48px;
+    /* width: 80vw; */
+  }
+
+  section.hero p {
+    font-size: 16px;
+    /* width: 85%; */
+  }
+}
+
+@media (max-width: 768px) {
+  section.hero {
+    /* height: auto; */
+    padding: 100px 20px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-container {
+    /* height: auto; */
+    padding: 80px 0;
+  }
+
+  section.hero h1 {
+    font-size: 36px;
+    /* width: 90vw; */
+  }
+
+  section.hero p {
+    font-size: 15px;
+    /* width: 90%; */
+  }
+
+  /* .video-container iframe {
+    width: 200vw;
+    height: 112.5vw;
+    min-height: unset;
+    min-width: unset;
+  } */
+}
+
+@media (max-width: 480px) {
+  section.hero h1 {
+    font-size: 28px;
+  }
+
+  section.hero p {
+    font-size: 14px;
+  }
+
+  /* .video-container iframe {
+    width: 250vw;
+    height: 140vw;
+  } */
+} 
+ 
+
+
+      .job-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        gap: 20px;
+        color: #fff;
+        padding: 20px;
+        margin-bottom: 1rem;
+      }
+      .job-header p {
+        width: 55%;
+        line-height: 1.4;
+      }
+      .job-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        align-items: center;
+        margin-bottom: 5rem;
+      }
+      .job-card1 {
+        background: transparent;
+        width: 320px;
+        padding: 20px;
+        /* border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: 1px solid rgba(99, 99, 99, 0.2);
+        color: white;
+        position: relative;
+      }
+      .job-card1 .logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      .job-card1 .logo img {
+        width: 30px;
+        height: 30px;
+      }
+      .job-card1 h2 {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .job-card1 p {
+        font-size: 14px;
+        color: #d1d5db;
+        margin-top: 4px;
+      }
+      .tags {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        white-space: nowrap;
+      }
+      .tag {
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .part-time {
+        background: #374151;
+        color: white;
+      }
+      .salary {
+        background: #bb7cef45;
+        color: white;
+      }
+      .location {
+        background: #35465d;
+        color: white;
+      }
+      .job-card1 .icons {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        gap: 8px;
+      }
+      .job-card1 .icons i {
+        color: #9ca3af;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .job-card1 .icons i:hover {
+        color: white;
+      }
+      .liked {
+        color: red !important;
+      }
+      .saved {
+        color: #fff !important;
+      }
+      .share-options {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 45px;
+        background: #1f2937;
+        border-radius: 6px;
+        padding: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      .share-options a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+      .share-options a:hover {
+        background: #374151;
+      }
+      
+      .job-list-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        gap: 20px;
+        color: #fff;
+        padding: 20px;
+        margin-bottom: 1rem;
+      }
+      .job-list-header p {
+        width: 55%;
+        line-height: 1.4;
+      }
+      #jobCardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center all job cards horizontally */
+    gap: 20px; /* Space between cards */
+    margin-top: 20px;
+    text-align: center;
+    line-height: 1.5;
+    align-items: center;
+}
+
+.job-card {
+  background: transparent;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border: 1px solid rgba(99, 99, 99, 0.2);
+        color: white;
+        position: relative;
+        width: 300px;
+}
+.job-card button{
+  background: #10b981;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin: 5px auto;
+        gap: 10px;
+       
+}
+.job-card button:hover{
+  background-color: #059669;
+}
+.job-card a{
+  text-decoration: none;
+}
+
+.action-buttons {
+    margin-top: 10px;
+}
+
+.action-buttons button {
+  background: transparent;
+    color: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: 1px solid rgba(99, 99, 99, 0.2);
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-buttons button:hover {
+    background-color: #3333337a;
+}
+
+.action-buttons button.liked {
+    color: #007bff;
+}
+
+.action-buttons i {
+    margin-right: 5px;
+}
+
+
+.modal {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    /* background: rgb(12 12 12 / 77%); */
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgb(255 255 255 / 96%);
+    text-align: center;
+    border-radius: 10px;
+    width: 300px;
+    height: 250px;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.modal p{
+  width: 100%;
+  color: #fff;
+}
+button {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#confirmLogout {
+    background: red;
+    color: white;
+}
+
+#cancelLogout {
+    background: gray;
+    color: white;
+}
+
+      .footer {
+            /* background-color: rgb(40 40 40 / 47%); */
+            padding: 20px;
+            text-align: center;
+            margin-top: 4rem;
+            box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+        }
+        .footer-section1{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid grey;
+        }
+        .footer-section2{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+        .footer .logo img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: -50px;
+        }
+        .footer .nav-links {
+            margin: 15px 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: -45px;
+        }
+        .footer .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .footer .nav-links a:hover {
+            color: #38bdf8;
+        }
+        .footer.copyright {
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        p.copyright {
+    color: #fff;
+}
+        .footer .copyright span {
+            color: red;
+        }
+        .footer .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 15px 0;
+        }
+        .footer .social-icons a {
+            color: white;
+            font-size: 18px;
+            padding: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+        .footer.social-icons a:hover {
+            background: #38bdf8;
+        }
+         .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+         .scroll-top:hover {
+            background: #059669;
+        }
+
+
+        @media (max-width: 1024px) {
+  .footer .logo img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: -30px;
+  }
+
+  .footer .nav-links a {
+    font-size: 14px;
+  }
+
+  .footer .social-icons a {
+    font-size: 16px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-section1,
+  .footer-section2 {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: -30px;
+  }
+
+  .footer .logo img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: -20px;
+  }
+
+  .footer .social-icons {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer .social-icons a {
+    font-size: 16px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer .logo img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .footer .nav-links a {
+    font-size: 13px;
+  }
+
+  .footer .copyright {
+    font-size: 12px;
+  }
+
+  .footer .social-icons a {
+    font-size: 14px;
+  }
+
+  .scroll-top {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+}
+
+
+    </style>
+  </head>
+  <body onload="displayUsername()">
+    <header>
+      <nav class="navbar">
+        <div class="logo"><img src="navbar-logo.png" alt="" /></div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="index1.html">Home</a></li>
+          <li><a href="index1.html">About Us</a></li>
+          <li><a href="index1.html">Service</a></li>
+          <li>
+            <a href="#">Jobs <span>&#9662;</span></a>
+            <ul class="dropdown">
+              <li><a href="job-categories.html" style="color: black">Job Categories</a></li>
+              <li id="postJob" style="display: none;">
+                <a href="job-post.html" style="color: black">Post a Job</a>
+            </li>
+            <li id="applyJob" style="display: none;">
+              <a href="job-apply.html" style="color: black">Apply a Job</a>
+          </li>
+              <!-- <li><a href="job-post.html" style="color: black">Post a Job</a></li> -->
+              <!-- <li><a href="job-apply.html" style="color: black">Apply a job</a></li> -->
+            </ul>
+          </li>
+        </ul>
+        <div class="right-section">
+          <!-- <a href="login.html">Login</a> -->
+          <span id="user-profile"></span>
+          <div class="profile">
+            <img
+              src="user-image.jpg"
+              alt="Profile"
+              class="profile-pic"
+              onclick="toggleProfileDropdown()"
+            />
+            <ul class="profile-dropdown" id="profileDropdown">
+              <a href="profile-page.html">
+                <li>Profile</li>
+              </a>
+              <a href="#">
+                <li id="logoutBtn" onclick="logoutUser">Logout</li>
+              </a>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- Background Video -->
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube.com/embed/JsNvHJsufhI?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1"
+        frameborder="0"
+        allowfullscreen
+      >
+      </iframe>
+      <div class="overlay"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Got Talent ? Meet Opportunity</h1>
+      <p>
+        Find Jobs, Employment & Career Opportunities. Some of the companies
+        we've helped recruit excellent applicants over the years.
+      </p>
+    </section>
+
+    <div class="job-header">
+      <h1>Popular Companies</h1>
+      <p>earch all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30000+ companies worldwide.</p>
+    </div>
+    <div class="job-card-container">
+      <div class="job-card1">
+        <div class="logo">
+          <img
+            src="google-img.png"
+            alt="Google"
+          />
+        </div>
+        <h2>Web Designer / Developer</h2>
+        <p>Looking for an experienced Web Designer for our company.</p>
+        <div class="tags">
+          <span class="tag part-time">Full Time</span>
+          <span class="tag salary">$5,000 - $5,500</span>
+          <span class="tag location">USA</span>
+        </div>
+        <div class="icons">
+          <i class="far fa-heart like-icon"></i>
+          <i class="far fa-bookmark save-icon"></i>
+          <i class="fas fa-external-link-alt share-icon"></i>
+        </div>
+        <div class="share-options">
+          <a href="https://web.whatsapp.com/" target="_blank"
+            ><i class="fab fa-whatsapp"></i> WhatsApp</a
+          >
+          <a href="https://mail.google.com/" target="_blank"
+            ><i class="fas fa-envelope"></i> Gmail</a
+          >
+          <a href="https://www.skype.com/" target="_blank"
+            ><i class="fab fa-skype"></i> Skype</a
+          >
+        </div>
+      </div>
+      <div class="job-card1">
+        <div class="logo">
+          <img src="facebook-img.png" alt="Google" />
+        </div>
+        <h2>Marketing Director</h2>
+        <p>Looking for an experienced Web Designer for our company.</p>
+        <div class="tags">
+          <span class="tag part-time">Full Time</span>
+          <span class="tag salary">$3,000 - $3,500</span>
+          <span class="tag location">Pakistan</span>
+        </div>
+        <div class="icons">
+          <i class="far fa-heart like-icon"></i>
+          <i class="far fa-bookmark save-icon"></i>
+          <i class="fas fa-external-link-alt share-icon"></i>
+        </div>
+        <div class="share-options">
+          <a href="https://web.whatsapp.com/" target="_blank"
+            ><i class="fab fa-whatsapp"></i> WhatsApp</a
+          >
+          <a href="https://mail.google.com/" target="_blank"
+            ><i class="fas fa-envelope"></i> Gmail</a
+          >
+          <a href="https://www.skype.com/" target="_blank"
+            ><i class="fab fa-skype"></i> Skype</a
+          >
+        </div>
+      </div>
+      <div class="job-card1">
+        <div class="logo">
+          <img
+            src="android-img.png"
+            alt="Google"
+          />
+        </div>
+        <h2>Application Developer</h2>
+        <p>Looking for an experienced Web Designer for our company.</p>
+        <div class="tags">
+          <span class="tag part-time">Part Time</span>
+          <span class="tag salary">$4,000 - $4,500</span>
+          <span class="tag location">Dubai</span>
+        </div>
+        <div class="icons">
+          <i class="far fa-heart like-icon"></i>
+          <i class="far fa-bookmark save-icon"></i>
+          <i class="fas fa-external-link-alt share-icon"></i>
+        </div>
+        <div class="share-options">
+          <a href="https://web.whatsapp.com/" target="_blank"
+            ><i class="fab fa-whatsapp"></i> WhatsApp</a
+          >
+          <a href="https://mail.google.com/" target="_blank"
+            ><i class="fas fa-envelope"></i> Gmail</a
+          >
+          <a href="https://www.skype.com/" target="_blank"
+            ><i class="fab fa-skype"></i> Skype</a
+          >
+        </div>
+      </div>
+      <div class="job-card1">
+        <div class="logo">
+          <img
+            src="lenovo-img.png"
+            alt="Google"
+          />
+        </div>
+        <h2>Senior Product Designer</h2>
+        <p>Looking for an experienced Web Designer for our company.</p>
+        <div class="tags">
+          <span class="tag part-time">Remote</span>
+          <span class="tag salary">$4,000 - $5,000</span>
+          <span class="tag location">China</span>
+        </div>
+        <div class="icons">
+          <i class="far fa-heart like-icon"></i>
+          <i class="far fa-bookmark save-icon"></i>
+          <i class="fas fa-external-link-alt share-icon"></i>
+        </div>
+        <div class="share-options">
+          <a href="https://web.whatsapp.com/" target="_blank"
+            ><i class="fab fa-whatsapp"></i> WhatsApp</a
+          >
+          <a href="https://mail.google.com/" target="_blank"
+            ><i class="fas fa-envelope"></i> Gmail</a
+          >
+          <a href="https://www.skype.com/" target="_blank"
+            ><i class="fab fa-skype"></i> Skype</a
+          >
+        </div>
+      </div>
+      <div class="job-card1">
+        <div class="logo">
+          <img src="spotify-img.png" alt="Google" />
+        </div>
+        <h2>Web Designer / Developer</h2>
+        <p>Looking for an experienced Web Designer for our company.</p>
+        <div class="tags">
+          <span class="tag part-time">Part Time</span>
+          <span class="tag salary">$4,000 - $4,500</span>
+          <span class="tag location">Australia</span>
+        </div>
+        <div class="icons">
+          <i class="far fa-heart like-icon"></i>
+          <i class="far fa-bookmark save-icon"></i>
+          <i class="fas fa-external-link-alt share-icon"></i>
+        </div>
+        <div class="share-options">
+          <a href="https://web.whatsapp.com/" target="_blank"
+            ><i class="fab fa-whatsapp"></i> WhatsApp</a
+          >
+          <a href="https://mail.google.com/" target="_blank"
+            ><i class="fas fa-envelope"></i> Gmail</a
+          >
+          <a href="https://www.skype.com/" target="_blank"
+            ><i class="fab fa-skype"></i> Skype</a
+          >
+        </div>
+      </div>
+      <div class="job-card1">
+        <div class="logo">
+          <img src="linked-img.png" alt="Google" />
+        </div>
+        <h2>Php Developer</h2>
+        <p>Looking for an experienced Web Designer for our company.</p>
+        <div class="tags">
+          <span class="tag part-time">Full Time</span>
+          <span class="tag salary">$5,000 - $6,000</span>
+          <span class="tag location">USA</span>
+        </div>
+        <div class="icons">
+          <i class="far fa-heart like-icon"></i>
+          <i class="far fa-bookmark save-icon"></i>
+          <i class="fas fa-external-link-alt share-icon"></i>
+        </div>
+        <div class="share-options">
+          <a href="https://web.whatsapp.com/" target="_blank"
+            ><i class="fab fa-whatsapp"></i> WhatsApp</a
+          >
+          <a href="https://mail.google.com/" target="_blank"
+            ><i class="fas fa-envelope"></i> Gmail</a
+          >
+          <a href="https://www.skype.com/" target="_blank"
+            ><i class="fab fa-skype"></i> Skype</a
+          >
+        </div>
+      </div>
+    </div>
+
+    
+      <div class="job-list-header">
+        <h1>Job Vacancies</h1>
+        <p>
+          Whether you're looking for your next job or the perfect candidate, Job
+          Hive aims to make the process efficient and seamless!
+        </p>
+      </div>
+      <!-- <div class="job-list-container" id="jobCardsContainer"> -->
+        
+          <div class="job-list-container" id="jobCardsContainer"></div>
+        
+    <!-- </div> -->
+
+
+    <div id="logoutModal" class="modal">
+      <div class="modal-content">
+          <p>Are you sure you want to log out?</p>
+          <button id="confirmLogout">Logout</button>
+          <button id="cancelLogout">Cancel</button>
+      </div>
+  </div>
+
+
+ <!-- footer section -->
+ <footer class="footer">
+  <div class="footer-section1">
+  <div class="logo">
+      <img src="navbar-logo.png" alt="Logo">
+  </div>
+  <ul class="nav-links">
+    <li><a href="index1.html">Home</a></li>
+    <li><a href="index1.html">About Us</a></li>
+    <li><a href="index1.html">Service</a></li>
+    <li><a href="#">Job Categories</a></li>
+    <li><a href="job-post.html">Post Job</a></li>
+    <li><a href="job-apply.html">Apply Job</a></li>
+</ul>
+</div>
+<div class="footer-section2">
+  <p class="copyright">
+      &copy;2025 JobHive. Design & Develop with <span>❤️</span> by Arifa Sultana.
+  </p>
+  <div class="social-icons">
+      <a href="#"><i class="fas fa-shopping-cart"></i></a>
+      <a href="#"><i class="fab fa-dribbble"></i></a>
+      <a href="#"><i class="fab fa-behance"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fas fa-envelope"></i></a>
+  </div>
+</div>
+</footer>
+
+<button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  ↑
+</button>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<!-- <script src="firebaseconfig.js"></script> -->
+<script src="myconfig.js"></script>
+    <script>
+       const firebaseConfig= myfirebaseConfig;
+       firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+        const db = firebase.firestore();
+
+//navbar section
+
+
+function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('active');
+    document.querySelector('.right-section').classList.toggle('active');
+  }
+
+
+window.addEventListener("scroll", function () {
+        let navbar = document.querySelector(".navbar");
+
+        if (window.scrollY > 50) {
+          navbar.style.backgroundColor = "rgb(15 23 42/ 1)"; // Darker blue-gray when scrolled
+          navbar.style.boxShadow = "#374151 0px 1px 0px";
+        } else {
+          navbar.style.backgroundColor = "transparent"; // Original background
+          navbar.style.boxShadow = "none";
+        }
+      });
+      function toggleProfileDropdown() {
+        var dropdown = document.getElementById("profileDropdown");
+        dropdown.style.display =
+          dropdown.style.display === "block" ? "none" : "block";
+      }
+      document.addEventListener("click", function (event) {
+        var profile = document.querySelector(".profile");
+        var dropdown = document.getElementById("profileDropdown");
+        if (!profile.contains(event.target)) {
+          dropdown.style.display = "none";
+        }
+      });
+
+      document.getElementById("logoutBtn").addEventListener("click", function () {
+    document.getElementById("logoutModal").style.display = "block"; // Show modal
+});
+
+// Cancel Button - Hide modal
+document.getElementById("cancelLogout").addEventListener("click", function () {
+    document.getElementById("logoutModal").style.display = "none"; // Hide modal
+});
+
+// Confirm Logout
+document.getElementById("confirmLogout").addEventListener("click", async function () {
+    try {
+        await auth.signOut(); // Firebase Logout
+        console.log("User logged out");
+        document.getElementById("logoutModal").style.display = "none"; // Hide modal after logout
+    } catch (error) {
+        console.error("Logout error:", error);
+    }
+});
+
+
+      document.getElementById("logoutBtn").addEventListener("click", async function () {
+    const user = auth.currentUser;
+
+    if (user) {
+        try {
+            // Get user's profile image URL from Firestore (if stored)
+            const userDoc = await db.collection("users").doc(user.uid).get();
+            const profileImageUrl = userDoc.data()?.profileImage;
+
+            if (profileImageUrl) {
+                // Delete the profile image from Firebase Storage
+                const storageRef = storage.refFromURL(profileImageUrl);
+                await storageRef.delete();
+            }
+
+            // Remove local storage profile image
+            localStorage.removeItem("profileImage");
+
+            // Sign out the user
+            await auth.signOut();
+
+            // Update navbar UI to show "Login"
+            const userProfile = document.getElementById("user-profile");
+            userProfile.innerHTML = `<a href="login.html">Login</a>`; // Clickable login link
+
+            // Show default profile picture
+            document.querySelector(".profile-pic").src = "default-profile.png"; 
+
+            // Redirect to login page
+            window.location.href = "login.html";
+        } catch (error) {
+            console.error("Error logging out:", error);
+        }
+    }
+});
+
+       //scroll section
+      function scrollCarousel(direction) {
+        const carousel = document.getElementById("carousel");
+        const scrollAmount = 300; // Adjust scroll amount
+        carousel.scrollBy({
+          left: direction * scrollAmount,
+          behavior: "smooth",
+        });
+      }
+
+//       //navbar profile 
+//       window.addEventListener("load", function () {
+//   let profileImage = localStorage.getItem("profileImage");
+
+//   if (profileImage) {
+//     // If an image is stored, update the profile image in the navbar
+//     document.querySelector(".profile-pic").src = profileImage;
+//   }
+// });
+
+
+window.addEventListener("load", async function () {
+    auth.onAuthStateChanged(async (user) => {
+        const userProfile = document.getElementById("user-profile");
+        const profilePic = document.querySelector(".profile-pic");
+        const defaultProfileImage = "user-image.jpg"; // Your default image URL
+
+        if (user) {
+            try {
+                const userDoc = await db.collection("users").doc(user.uid).get();
+                const profileImageUrl = userDoc.data()?.profileImage;
+                const username = userDoc.data()?.username || "User";
+
+                userProfile.textContent = username; // Show username
+                profilePic.src = profileImageUrl || defaultProfileImage; // Set user's image or default
+                localStorage.setItem("profileImage", profileImageUrl || defaultProfileImage);
+            } catch (error) {
+                console.error("Error loading user data:", error);
+            }
+        } else {
+            // Show "Login" as a clickable link and set default profile image
+            userProfile.innerHTML = `<a href="login.html">Login</a>`;
+            profilePic.src = defaultProfileImage; // Set default profile image
+        }
+    });
+});
+
+
+      
+function displayUsername() {
+    firebase.auth().onAuthStateChanged(async (user) => {
+        console.log(user); // Debugging: Check if user is logged in
+        if (user) {
+            try {
+                const userRef = db.collection("users").doc(user.uid);
+                const doc = await userRef.get();
+                
+                if (doc.exists) {
+                    const username = doc.data().username; // Make sure "username" exists in Firestore
+                    document.getElementById("user-profile").textContent = username || "User";
+                } else {
+                    console.log("No such user document!");
+                    document.getElementById("user-profile").textContent = "User";
+                }
+            } catch (error) {
+                console.error("Error fetching username:", error);
+                document.getElementById("user-profile").textContent = "User";
+            }
+        } else {
+            document.getElementById("user-profile").textContent = "Guest";
+        }
+    });
+}
+
+
+
+// function logoutUser() {
+//     const user = auth.currentUser;
+
+//     if (user) {
+//         db.collection("users").doc(user.uid).delete().then(() => {
+//             console.log("User data removed from Firestore.");
+//         }).catch((error) => {
+//             console.error("Error deleting user data:", error);
+//         });
+//     }
+
+//     auth.signOut().then(() => {
+//         localStorage.removeItem("username");
+//         document.getElementById("user-profile").textContent = "Guest";
+//         window.location.href = "login.html"; // Redirect to login
+//     }).catch((error) => {
+//         console.error("Error signing out:", error);
+//     });
+// }
+
+
+
+
+      document.querySelectorAll(".job-card1").forEach((card) => {
+        const likeIcon = card.querySelector(".like-icon");
+        const saveIcon = card.querySelector(".save-icon");
+        const shareIcon = card.querySelector(".share-icon");
+        const shareMenu = card.querySelector(".share-options");
+
+        // Like button functionality
+        likeIcon.addEventListener("click", function () {
+          this.classList.toggle("liked");
+          this.classList.toggle("far");
+          this.classList.toggle("fas");
+        });
+
+        // Save button functionality
+        saveIcon.addEventListener("click", function () {
+          this.classList.toggle("saved");
+          this.classList.toggle("far");
+          this.classList.toggle("fas");
+        });
+
+        // Share button functionality
+        shareIcon.addEventListener("click", function (event) {
+          event.stopPropagation();
+          shareMenu.style.display =
+            shareMenu.style.display === "block" ? "none" : "block";
+        });
+
+        // Close share menu when clicking outside
+        document.addEventListener("click", function (event) {
+          if (!card.contains(event.target)) {
+            shareMenu.style.display = "none";
+          }
+        });
+      });
+
+      //post job
+    
+// window.onload = function () {
+//     const jobCardsContainer = document.getElementById("jobCardsContainer");
+
+//     db.collection("jobs")
+//     .orderBy("timestamp", "desc")
+//     .onSnapshot(async (snapshot) => {
+//         jobCardsContainer.innerHTML = ""; // Clear old jobs
+
+//         for (const doc of snapshot.docs) {
+//             const job = doc.data();
+//             const ownerId = job.owner; // This is the user UID
+
+//             try {
+//                 // Fetch user details from the "users" collection
+//                 const userDoc = await db.collection("users").doc(ownerId).get();
+//                 const ownerName = userDoc.exists ? userDoc.data().username : "Unknown User";
+
+//                 // Append job card with the correct username
+//                 jobCardsContainer.innerHTML += `
+//                     <div class="job-card">
+//                         <h3>${job.title}</h3>
+//                         <p>${job.description}</p>
+//                         <p><strong>Category:</strong> ${job.category}</p>
+//                         <p><strong>Salary:</strong> ${job.salaryMin} - ${job.salaryMax}</p>
+//                         <p><strong>Posted by:</strong> ${ownerName}</p>
+//                         <a href="job-apply.html"><button class="apply-btn">Apply Now</button></a>
+//                     </div>
+//                 `;
+//             } catch (error) {
+//                 console.error("Error fetching user details:", error);
+//             }
+//         }
+//     });
+//   };
+
+
+
+auth.onAuthStateChanged(user => {
+      if (user) {
+          db.collection("users").doc(user.uid).get()
+              .then(doc => {
+                  if (doc.exists) {
+                      let userRole = doc.data().role;
+                      if (userRole === "job-provider") {
+                          document.getElementById("postJob").style.display = "block"; // Show "Post a Job"
+                      }
+                  }
+              })
+              .catch(error => {
+                  console.error("Error fetching user role:", error);
+              });
+      }
+  });
+
+  auth.onAuthStateChanged(user => {
+      if (user) {
+          db.collection("users").doc(user.uid).get()
+              .then(doc => {
+                  if (doc.exists) {
+                      let userRole = doc.data().role;
+                      if (userRole === "job-seeker") {
+                          document.getElementById("applyJob").style.display = "block"; // Show "apply a Job"
+                      }
+                  }
+              })
+              .catch(error => {
+                  console.error("Error fetching user role:", error);
+              });
+      }
+  });
+
+
+      //post job
+
+window.onload = function () {
+    const jobCardsContainer = document.getElementById("jobCardsContainer");
+
+    // Check if the URL contains ?scroll=true
+    const urlParams = new URLSearchParams(window.location.search);
+    const shouldScroll = urlParams.get("scroll");
+
+    if (shouldScroll) {
+        setTimeout(() => {
+            jobCardsContainer.scrollIntoView({ behavior: "smooth" });
+        }, 500); // Adding delay to ensure content is loaded
+    }
+
+    firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+            try {
+                // Fetch the logged-in user's role
+                const userRef = db.collection("users").doc(user.uid);
+                const userDoc = await userRef.get();
+                const userRole = userDoc.exists ? userDoc.data().role : "not-specified";
+
+                db.collection("jobs")
+                    .orderBy("timestamp", "desc")
+                    .onSnapshot(async (snapshot) => {
+                        jobCardsContainer.innerHTML = ""; // Clear old jobs
+
+                        for (const doc of snapshot.docs) {
+                            const job = doc.data();
+                            const ownerId = job.owner; // Job poster's UID
+
+                            try {
+                                // Fetch job owner's details from Firestore
+                                const ownerDoc = await db.collection("users").doc(ownerId).get();
+                                const ownerName = ownerDoc.exists ? ownerDoc.data().username : "Unknown User";
+
+                                // Show "Apply Now" button only if the logged-in user is a job seeker
+                                const applyButton = userRole === "job-seeker"
+                                    ? `<a href="job-apply.html"><button class="apply-btn">Apply Now</button></a>`
+                                    : ""; // Empty string if user is a job provider
+
+                                // Append job card with role-based "Apply Now" button
+                                jobCardsContainer.innerHTML += `
+                                        <div class="job-card">
+                                        <h3>${job.title}</h3>
+                                        <p>${job.description}</p>
+                                        <p><strong>Category:</strong> ${job.category}</p>
+                                        <p><strong>Salary:</strong> $${job.salaryMin} - $${job.salaryMax}</p>
+                                        <p><strong>Posted by:</strong> ${ownerName}</p>
+                                        ${applyButton} <!-- Conditionally displayed -->
+                                    </div>
+                                `;
+                            } catch (error) {
+                                console.error("Error fetching job owner details:", error);
+                            }
+                        }
+                    });
+            } catch (error) {
+                console.error("Error fetching user role:", error);
+            }
+        }
+    });
+};
+
+
+// Function to toggle "Like"
+function toggleLike(event) {
+    const btn = event.target;
+    btn.classList.toggle("liked");
+    btn.innerHTML = btn.classList.contains("liked")
+        ? '<i class="fas fa-thumbs-up"></i> Liked'
+        : '<i class="fas fa-thumbs-up"></i> Like';
+}
+
+// Function to handle "Share"
+function shareJob(title) {
+    const shareData = {
+        title: title,
+        text: `Check out this job: ${title}`,
+        url: window.location.href,
+    };
+    if (navigator.share) {
+        navigator.share(shareData)
+            .then(() => console.log("Job shared successfully!"))
+            .catch((error) => console.error("Error sharing job:", error));
+    } else {
+        alert("Sharing not supported on this device.");
+    }
+}
+
+// Function to handle "Save"
+function saveJob(event) {
+    const btn = event.target;
+    const jobCard = btn.closest(".job-card");
+    const jobTitle = jobCard.querySelector("h3").textContent;
+
+    let savedJobs = JSON.parse(localStorage.getItem("savedJobs")) || [];
+    if (!savedJobs.includes(jobTitle)) {
+        savedJobs.push(jobTitle);
+        localStorage.setItem("savedJobs", JSON.stringify(savedJobs));
+        alert(`${jobTitle} has been saved!`);
+    } else {
+        alert(`${jobTitle} is already saved.`);
+    }
+}
+
+    </script>
+  </body>
+</html>
